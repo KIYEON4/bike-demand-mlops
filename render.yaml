@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: bike-demand-mlops-api
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    buildCommand: pip install --no-cache-dir -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.7"
+      - key: MODEL_PATH
+        value: models/bike_demand_v1.0.0.joblib
+      - key: METADATA_PATH
+        value: models/model_metadata.json
+      - key: ENV_NAME
+        value: render-singapore-free
