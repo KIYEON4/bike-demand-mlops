@@ -1,0 +1,74 @@
+{
+  "model_version": "v1.0.0",
+  "model_type": "RandomForestRegressor",
+  "model_params": {
+    "n_estimators": 200,
+    "max_depth": 12,
+    "min_samples_leaf": 2,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "model_path": "models/bike_demand_v1.0.0.joblib",
+  "model_sha256": "59736d2ec67162fcc8935820b3cba7a4296f8833acf26aa4534404d69aacfc77",
+  "trained_at_utc": "2026-11-24T14:47:46Z",
+  "git": {
+    "commit": "b9c8a712562b5ba413eb89b594b4ea0031c19350",
+    "short_commit": "b9c8a71",
+    "branch": "main",
+    "is_dirty": true
+  },
+  "environment": {
+    "python_version": "3.13.7",
+    "scikit_learn_version": "1.8.0",
+    "pandas_version": "3.1.1",
+    "numpy_version": "2.4.3",
+    "joblib_version": "1.5.3"
+  },
+  "dataset": {
+    "name": "UCI Bike Sharing Dataset (day.csv)",
+    "license": "CC BY 4.0",
+    "path": "data/raw/day.csv",
+    "sha256": "a6bcf826782d3c0fbfdcbeead17cd0884185a0dafe8ff10cd48a874ee7ba18be",
+    "total_rows": 731,
+    "split_strategy": "chronological_time_split",
+    "split_date": "2012-08-01",
+    "train_rows": 578,
+    "train_date_range": [
+      "2011-01-01",
+      "2012-07-31"
+    ],
+    "test_rows": 153,
+    "test_date_range": [
+      "2012-08-01",
+      "2012-12-31"
+    ]
+  },
+  "feature_columns": [
+    "season",
+    "yr",
+    "mnth",
+    "holiday",
+    "weekday",
+    "workingday",
+    "weathersit",
+    "temp_c",
+    "atemp_c",
+    "hum_pct",
+    "windspeed_kmh"
+  ],
+  "excluded_leakage_columns": [
+    "casual",
+    "registered"
+  ],
+  "target_column": "cnt",
+  "target_unit": "rentals/day (대/일)",
+  "train_baseline_mean_rentals": 4125.23,
+  "train_metrics": {
+    "mae_rentals_per_day": 209.84,
+    "rmse_rentals_per_day": 302.78
+  },
+  "demand_thresholds": {
+    "low_max": 3000,
+    "high_min": 5500
+  }
+}

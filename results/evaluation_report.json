@@ -1,0 +1,57 @@
+{
+  "timestamp_utc": "2026-11-24T14:47:47Z",
+  "git": {
+    "commit": "b9c8a712562b5ba413eb89b594b4ea0031c19350",
+    "short_commit": "b9c8a71",
+    "branch": "main",
+    "is_dirty": true
+  },
+  "model_version": "v1.0.0",
+  "model_path": "models/bike_demand_v1.0.0.joblib",
+  "model_sha256": "59736d2ec67162fcc8935820b3cba7a4296f8833acf26aa4534404d69aacfc77",
+  "dataset_sha256": "a6bcf826782d3c0fbfdcbeead17cd0884185a0dafe8ff10cd48a874ee7ba18be",
+  "evaluation_protocol": {
+    "split_strategy": "chronological_time_split",
+    "split_date": "2012-08-01",
+    "train_count": 578,
+    "test_count": 153,
+    "test_date_range": [
+      "2012-08-01",
+      "2012-12-31"
+    ],
+    "preprocessing_fit_scope": "train_only",
+    "primary_metric": "MAE (rentals/day, 대/일)",
+    "secondary_metrics": [
+      "RMSE (rentals/day, 대/일)",
+      "R2 (unitless)"
+    ],
+    "baseline_method": "DummyRegressor(strategy='mean') fitted on train split",
+    "baseline_constant_prediction": 4125.23
+  },
+  "metrics": {
+    "baseline_mean": {
+      "mae_rentals_per_day": 2327.25,
+      "rmse_rentals_per_day": 2590.77,
+      "r2_score": -0.9562
+    },
+    "model_random_forest": {
+      "mae_rentals_per_day": 1025.63,
+      "rmse_rentals_per_day": 1218.35,
+      "r2_score": 0.5674
+    },
+    "improvement_over_baseline": {
+      "mae_reduction_rentals_per_day": 1301.62,
+      "mae_reduction_pct": 55.93,
+      "rmse_reduction_rentals_per_day": 1372.42,
+      "rmse_reduction_pct": 52.97
+    },
+    "beats_baseline": true
+  },
+  "interpretation": "시계열 평가 구간(153일)에서 학습 모델의 MAE는 1025.63 대/일로, 학습 평균 기준선(2327.25 대/일) 대비 55.93% 오차를 줄였습니다.",
+  "limitations_and_unmeasured_factors": [
+    "2011~2012년 워싱턴 D.C. 데이터로 학습되어 연도 성장 추세의 장기 외삽(예: 현재 연도)은 검증되지 않음.",
+    "허리케인·재난 경보·대규모 행사·교통 파업 등 비정형 외부 이벤트 변수가 입력에 포함되지 않음.",
+    "학습 및 평가에 실제 관측 기상치를 사용했으므로, 실제 운영 시 기상 예보 오차에 따른 추가 오차는 미측정.",
+    "도시 전체 일일 총 대여량만 예측하며 개별 대여소별 재고 불균형이나 시간대별 피크는 반영하지 않음."
+  ]
+}
