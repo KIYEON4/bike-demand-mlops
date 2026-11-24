@@ -133,7 +133,10 @@ def run_pipeline(
                     "finished_at_utc": utc_now_iso(),
                     "status": "failed",
                     "error": manifest["error_message"],
-                    "traceback_tail": traceback.format_exc().splitlines()[-5:],
+                    "traceback_tail": [
+                        line.replace(str(PROJECT_ROOT), "<repo>")
+                        for line in traceback.format_exc().splitlines()[-5:]
+                    ],
                 }
             )
             break
