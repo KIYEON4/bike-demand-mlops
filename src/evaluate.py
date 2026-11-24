@@ -38,13 +38,18 @@ def evaluate_model(
     """Compare trained model vs mean baseline on test split and analyze worst errors."""
     config = load_config(config_path)
     dataset_path = PROJECT_ROOT / config["dataset_path"]
-    model_path = (
-        Path(model_path_override)
+    raw_model_path = (
+        str(model_path_override)
         if model_path_override
-        else PROJECT_ROOT / config["model_output_path"]
+        else config["model_output_path"]
+    )
+    model_path = (
+        Path(raw_model_path)
+        if Path(raw_model_path).is_absolute()
+        else PROJECT_ROOT / raw_model_path
     )
     if not model_path.exists():
-        raise FileNotFoundError(f"Model artifact not found: {model_path}")
+        raise FileNotFoundError(f"Model artifact not found: {raw_model_path}")
 
     raw_df = pd.read_csv(dataset_path)
     df = raw_to_physical_features(raw_df)

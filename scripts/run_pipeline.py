@@ -103,13 +103,13 @@ def run_pipeline(
             elif step_name == "evaluate":
                 eval_report, _ = evaluate_model(
                     config_path=config_path,
-                    model_path_override=resolved_model_path,
+                    model_path_override=configured_model_path,
                 )
                 manifest["model_sha256"] = eval_report["model_sha256"]
                 manifest["output_paths"]["evaluation_report"] = "results/evaluation_report.json"
                 manifest["output_paths"]["error_analysis"] = "results/error_analysis.json"
             elif step_name == "smoke_test":
-                smoke_report = run_inprocess_smoke_test(model_path=str(resolved_model_path))
+                smoke_report = run_inprocess_smoke_test(model_path=configured_model_path)
                 save_json(PROJECT_ROOT / "results" / "smoke_test_report.json", smoke_report)
                 manifest["output_paths"]["smoke_test_report"] = "results/smoke_test_report.json"
 
