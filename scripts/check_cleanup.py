@@ -51,8 +51,8 @@ def check_cleanup(
             {
                 "resource": "GitHub Public Repository (main branch)",
                 "cost": "$0 (GitHub Free Public Repo)",
-                "reason": "과제 제출 및 평가자 재실행 검증용 코드·공개 데이터·모델·로그 보관",
-                "cleanup_plan": "과목 최종 성적 확정 후 비공개 전환 또는 아카이브 처리 예정",
+                "reason": "서비스 재현 및 실행 이력 확인을 위한 코드·공개 데이터·모델·로그 보관",
+                "cleanup_plan": "장기 미사용 시 저장소 아카이브 또는 비공개 전환 예정",
             }
         ],
     }

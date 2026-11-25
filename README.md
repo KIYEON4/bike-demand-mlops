@@ -21,8 +21,8 @@
 - **주요 라이브러리 및 고정 버전**: [`requirements.txt`](requirements.txt) (`scikit-learn==1.8.0`, `pandas==3.1.1`, `numpy==2.4.3`, `fastapi==0.115.12`, `uvicorn==0.34.0`, `pydantic==2.11.3`, `pytest==8.3.5` 등)
 - **필요 권한**:
   - 로컬 재실행: 별도 클라우드 키 불필요 (공개 데이터 `data/raw/day.csv` 포함 및 공식 URL 재확보 지원)
-  - 클라우드 실행/정리: 본인 GitHub 계정(Public 저장소 + Actions) 및 Render 무료 계정(GitHub OAuth, 신용카드 불필요)
-  - 상세 권한·비용($0 제한)·자원 정리 계획: [`docs/SECURITY_COST_RESOURCES.md`](docs/SECURITY_COST_RESOURCES.md)
+  - 클라우드 배포/정리: GitHub 계정(Public 저장소 + Actions) 및 Render 무료 계정(GitHub OAuth, 신용카드 미등록)
+  - 상세 권한·비용($0 제한)·자원 정리 내역: [`docs/SECURITY_COST_RESOURCES.md`](docs/SECURITY_COST_RESOURCES.md)
 
 ---
 
@@ -30,7 +30,7 @@
 
 ### 1) 저장소 복제 및 가상환경 설치
 ```bash
-git clone <PUBLIC_GITHUB_REPO_URL>
+git clone https://github.com/KIYEON4/bike-demand-mlops.git
 cd bike-demand-mlops
 python -m venv .venv
 # Windows PowerShell:
@@ -68,17 +68,17 @@ python scripts/smoke_test.py --url http://127.0.0.1:8000
 ### 6) 클라우드(Render) 배포 후 실행 · 오류 복구 · 자원 정리 검증
 1. **클라우드 정상 추론 실행 및 로그 기록**:
    ```bash
-   python scripts/verify_cloud.py --url https://<본인-render-url>.onrender.com
+   python scripts/verify_cloud.py --url https://bike-demand-mlops.onrender.com
    ```
-2. **클라우드 오류 재현 (`MODEL_PATH` 오타) 및 수정 후 재검사**: 상세 절차는 [`docs/ERROR_RECOVERY_GUIDE.md`](docs/ERROR_RECOVERY_GUIDE.md) 참고
+2. **클라우드 오류 재현 (`MODEL_PATH` 오타) 및 수정 후 재검사**: 상세 기록은 [`docs/ERROR_RECOVERY_GUIDE.md`](docs/ERROR_RECOVERY_GUIDE.md) 참고
    ```bash
-   python scripts/record_error_recovery.py --phase fail --url https://<본인-render-url>.onrender.com --scenario wrong_model_path
+   python scripts/record_error_recovery.py --phase fail --url https://bike-demand-mlops.onrender.com --scenario wrong_model_path
    # Render에서 MODEL_PATH를 models/bike_demand_v1.0.0.joblib으로 복구 및 재배포 후:
-   python scripts/record_error_recovery.py --phase recover --url https://<본인-render-url>.onrender.com --scenario wrong_model_path
+   python scripts/record_error_recovery.py --phase recover --url https://bike-demand-mlops.onrender.com --scenario wrong_model_path
    ```
 3. **클라우드 자원 정리(Suspend/Delete) 후 상태 재조회**:
    ```bash
-   python scripts/check_cleanup.py --url https://<본인-render-url>.onrender.com
+   python scripts/check_cleanup.py --url https://bike-demand-mlops.onrender.com
    ```
 
 ---

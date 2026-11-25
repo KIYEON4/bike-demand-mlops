@@ -1,4 +1,4 @@
-# 결과 평가 · 오류 사례 분석 · 한계 (20점)
+# 결과 평가 · 오류 사례 분석 · 한계
 
 모든 수치는 [`results/evaluation_report.json`](../results/evaluation_report.json), [`results/error_analysis.json`](../results/error_analysis.json), [`results/smoke_test_report.json`](../results/smoke_test_report.json)에 저장된 실제 실행 결과입니다.
 
