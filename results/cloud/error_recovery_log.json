@@ -1,0 +1,205 @@
+{
+  "timestamp_utc": "2026-11-25T10:14:14Z",
+  "scenario": "wrong_model_path",
+  "service_url": "https://bike-demand-mlops.onrender.com",
+  "git": {
+    "commit": "4832f64791126f0b322c2b4f144588bd5c2728ab",
+    "short_commit": "4832f64",
+    "branch": "main",
+    "is_dirty": true
+  },
+  "incident_record": {
+    "phase": "error_reproduction_failed",
+    "timestamp_utc": "2026-11-25T10:09:14Z",
+    "service_url": "https://bike-demand-mlops.onrender.com",
+    "scenario": "wrong_model_path",
+    "git": {
+      "commit": "4832f64791126f0b322c2b4f144588bd5c2728ab",
+      "short_commit": "4832f64",
+      "branch": "main",
+      "is_dirty": true
+    },
+    "failed_request": {
+      "method": "POST",
+      "endpoint": "https://bike-demand-mlops.onrender.com/predict",
+      "payload": {
+        "season": 2,
+        "yr": 1,
+        "mnth": 5,
+        "holiday": 0,
+        "weekday": 3,
+        "workingday": 1,
+        "weathersit": 1,
+        "temp_c": 23.5,
+        "atemp_c": 24.0,
+        "hum_pct": 55.0,
+        "windspeed_kmh": 12.0
+      }
+    },
+    "health_check_during_incident": {
+      "http_status": 503,
+      "response": {
+        "status": "degraded",
+        "env_name": "render-singapore-free",
+        "model_loaded": false,
+        "model_path": "models/non_existent_model.joblib",
+        "model_version": null,
+        "error": "FileNotFoundError: Model artifact not found at configured MODEL_PATH='models/non_existent_model.joblib'",
+        "timestamp_utc": "2026-11-25T10:09:13Z"
+      }
+    },
+    "failed_response": {
+      "http_status": 503,
+      "body": {
+        "detail": {
+          "error_code": "MODEL_NOT_LOADED",
+          "message": "FileNotFoundError: Model artifact not found at configured MODEL_PATH='models/non_existent_model.joblib'",
+          "model_path": "models/non_existent_model.joblib",
+          "action": "Stop downstream processing and verify MODEL_PATH configuration."
+        }
+      }
+    },
+    "downstream_processing_halted": true,
+    "impact": "모델 아티팩트 로드 실패로 /health=503(degraded) 및 /predict=503(MODEL_NOT_LOADED) 반환. 오류 결과가 정상 예측 결과에 섞이지 않도록 후속 배치를 즉시 중단함."
+  },
+  "investigation_and_fix": {
+    "root_cause": "Render 환경변수 MODEL_PATH를 존재하지 않는 파일(models/non_existent_model.joblib)로 설정해 모델 로드 실패",
+    "fix_summary": "Render 환경변수 MODEL_PATH를 models/bike_demand_v1.0.0.joblib으로 수정 후 재배포"
+  },
+  "post_fix_verification": {
+    "health_check": {
+      "http_status": 200,
+      "response": {
+        "status": "ok",
+        "env_name": "render-singapore-free",
+        "model_loaded": true,
+        "model_path": "models/bike_demand_v1.0.0.joblib",
+        "model_version": "v1.0.0",
+        "error": null,
+        "timestamp_utc": "2026-11-25T10:14:12Z"
+      }
+    },
+    "rerun_previously_failed_task": {
+      "http_status": 200,
+      "input": {
+        "season": 2,
+        "yr": 1,
+        "mnth": 5,
+        "holiday": 0,
+        "weekday": 3,
+        "workingday": 1,
+        "weathersit": 1,
+        "temp_c": 23.5,
+        "atemp_c": 24.0,
+        "hum_pct": 55.0,
+        "windspeed_kmh": 12.0
+      },
+      "output": {
+        "request_id": "07c7fba1815e",
+        "timestamp_utc": "2026-11-25T10:14:12Z",
+        "env_name": "render-singapore-free",
+        "predicted_rentals": 5971.53,
+        "predicted_rentals_rounded": 5972,
+        "unit": "rentals/day (대/일)",
+        "demand_level": "high",
+        "rebalancing_advice": "수요 높음: 출퇴근·공원 거점 예비 자전거 증차 및 추가 재배치 인력 투입 권장",
+        "model_version": "v1.0.0",
+        "model_sha256_prefix": "59736d2ec671",
+        "git_commit": "4832f64"
+      }
+    },
+    "normal_input_rechecks": [
+      {
+        "case_id": "sunny_warm_spring_weekday",
+        "http_status": 200,
+        "input": {
+          "season": 2,
+          "yr": 1,
+          "mnth": 5,
+          "holiday": 0,
+          "weekday": 3,
+          "workingday": 1,
+          "weathersit": 1,
+          "temp_c": 23.5,
+          "atemp_c": 24.0,
+          "hum_pct": 55.0,
+          "windspeed_kmh": 12.0
+        },
+        "output": {
+          "request_id": "01c37caf8b8f",
+          "timestamp_utc": "2026-11-25T10:14:13Z",
+          "env_name": "render-singapore-free",
+          "predicted_rentals": 5971.53,
+          "predicted_rentals_rounded": 5972,
+          "unit": "rentals/day (대/일)",
+          "demand_level": "high",
+          "rebalancing_advice": "수요 높음: 출퇴근·공원 거점 예비 자전거 증차 및 추가 재배치 인력 투입 권장",
+          "model_version": "v1.0.0",
+          "model_sha256_prefix": "59736d2ec671",
+          "git_commit": "4832f64"
+        }
+      },
+      {
+        "case_id": "cloudy_mild_autumn_weekend",
+        "http_status": 200,
+        "input": {
+          "season": 3,
+          "yr": 1,
+          "mnth": 10,
+          "holiday": 0,
+          "weekday": 6,
+          "workingday": 0,
+          "weathersit": 2,
+          "temp_c": 16.0,
+          "atemp_c": 16.5,
+          "hum_pct": 72.0,
+          "windspeed_kmh": 18.0
+        },
+        "output": {
+          "request_id": "c94df6f7c528",
+          "timestamp_utc": "2026-11-25T10:14:14Z",
+          "env_name": "render-singapore-free",
+          "predicted_rentals": 3431.63,
+          "predicted_rentals_rounded": 3432,
+          "unit": "rentals/day (대/일)",
+          "demand_level": "medium",
+          "rebalancing_advice": "수요 보통: 주요 지하철역·상업지구 중심으로 표준 재배치 차량 운영 권장",
+          "model_version": "v1.0.0",
+          "model_sha256_prefix": "59736d2ec671",
+          "git_commit": "4832f64"
+        }
+      },
+      {
+        "case_id": "cold_rainy_winter_holiday",
+        "http_status": 200,
+        "input": {
+          "season": 4,
+          "yr": 0,
+          "mnth": 12,
+          "holiday": 1,
+          "weekday": 1,
+          "workingday": 0,
+          "weathersit": 3,
+          "temp_c": 2.5,
+          "atemp_c": 0.5,
+          "hum_pct": 88.0,
+          "windspeed_kmh": 26.0
+        },
+        "output": {
+          "request_id": "8ef35fc83039",
+          "timestamp_utc": "2026-11-25T10:14:14Z",
+          "env_name": "render-singapore-free",
+          "predicted_rentals": 1483.01,
+          "predicted_rentals_rounded": 1483,
+          "unit": "rentals/day (대/일)",
+          "demand_level": "low",
+          "rebalancing_advice": "수요 낮음: 기본 배치 유지 및 야간 정비·배터리 점검 우선 권장",
+          "model_version": "v1.0.0",
+          "model_sha256_prefix": "59736d2ec671",
+          "git_commit": "4832f64"
+        }
+      }
+    ],
+    "recovered": true
+  }
+}

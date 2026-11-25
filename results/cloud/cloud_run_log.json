@@ -1,0 +1,129 @@
+{
+  "timestamp_utc": "2026-11-25T10:04:06Z",
+  "cloud_provider": "Render Free Web Service",
+  "region": "singapore",
+  "service_url": "https://bike-demand-mlops.onrender.com",
+  "local_git": {
+    "commit": "4832f64791126f0b322c2b4f144588bd5c2728ab",
+    "short_commit": "4832f64",
+    "branch": "main",
+    "is_dirty": false
+  },
+  "health_check": {
+    "http_status": 200,
+    "response": {
+      "status": "ok",
+      "env_name": "render-singapore-free",
+      "model_loaded": true,
+      "model_path": "models/bike_demand_v1.0.0.joblib",
+      "model_version": "v1.0.0",
+      "error": null,
+      "timestamp_utc": "2026-11-25T10:04:04Z"
+    }
+  },
+  "model_info": {
+    "http_status": 200,
+    "model_version": "v1.0.0",
+    "model_sha256": "59736d2ec67162fcc8935820b3cba7a4296f8833acf26aa4534404d69aacfc77",
+    "git_commit": "4832f64"
+  },
+  "predictions": [
+    {
+      "case_id": "sunny_warm_spring_weekday",
+      "description": "맑고 따뜻한 봄 평일 (고수요 예상)",
+      "http_status": 200,
+      "latency_ms": 595.6,
+      "input": {
+        "season": 2,
+        "yr": 1,
+        "mnth": 5,
+        "holiday": 0,
+        "weekday": 3,
+        "workingday": 1,
+        "weathersit": 1,
+        "temp_c": 23.5,
+        "atemp_c": 24.0,
+        "hum_pct": 55.0,
+        "windspeed_kmh": 12.0
+      },
+      "output": {
+        "request_id": "8e25248d7242",
+        "timestamp_utc": "2026-11-25T10:04:05Z",
+        "env_name": "render-singapore-free",
+        "predicted_rentals": 5971.53,
+        "predicted_rentals_rounded": 5972,
+        "unit": "rentals/day (대/일)",
+        "demand_level": "high",
+        "rebalancing_advice": "수요 높음: 출퇴근·공원 거점 예비 자전거 증차 및 추가 재배치 인력 투입 권장",
+        "model_version": "v1.0.0",
+        "model_sha256_prefix": "59736d2ec671",
+        "git_commit": "4832f64"
+      }
+    },
+    {
+      "case_id": "cloudy_mild_autumn_weekend",
+      "description": "흐리고 선선한 가을 주말 (중간 수요 예상)",
+      "http_status": 200,
+      "latency_ms": 404.72,
+      "input": {
+        "season": 3,
+        "yr": 1,
+        "mnth": 10,
+        "holiday": 0,
+        "weekday": 6,
+        "workingday": 0,
+        "weathersit": 2,
+        "temp_c": 16.0,
+        "atemp_c": 16.5,
+        "hum_pct": 72.0,
+        "windspeed_kmh": 18.0
+      },
+      "output": {
+        "request_id": "32c9f38569ad",
+        "timestamp_utc": "2026-11-25T10:04:06Z",
+        "env_name": "render-singapore-free",
+        "predicted_rentals": 3431.63,
+        "predicted_rentals_rounded": 3432,
+        "unit": "rentals/day (대/일)",
+        "demand_level": "medium",
+        "rebalancing_advice": "수요 보통: 주요 지하철역·상업지구 중심으로 표준 재배치 차량 운영 권장",
+        "model_version": "v1.0.0",
+        "model_sha256_prefix": "59736d2ec671",
+        "git_commit": "4832f64"
+      }
+    },
+    {
+      "case_id": "cold_rainy_winter_holiday",
+      "description": "춥고 눈·비가 오는 겨울 공휴일 (저수요 예상)",
+      "http_status": 200,
+      "latency_ms": 593.28,
+      "input": {
+        "season": 4,
+        "yr": 0,
+        "mnth": 12,
+        "holiday": 1,
+        "weekday": 1,
+        "workingday": 0,
+        "weathersit": 3,
+        "temp_c": 2.5,
+        "atemp_c": 0.5,
+        "hum_pct": 88.0,
+        "windspeed_kmh": 26.0
+      },
+      "output": {
+        "request_id": "a396378678d0",
+        "timestamp_utc": "2026-11-25T10:04:06Z",
+        "env_name": "render-singapore-free",
+        "predicted_rentals": 1483.01,
+        "predicted_rentals_rounded": 1483,
+        "unit": "rentals/day (대/일)",
+        "demand_level": "low",
+        "rebalancing_advice": "수요 낮음: 기본 배치 유지 및 야간 정비·배터리 점검 우선 권장",
+        "model_version": "v1.0.0",
+        "model_sha256_prefix": "59736d2ec671",
+        "git_commit": "4832f64"
+      }
+    }
+  ],
+  "status": "success"
+}

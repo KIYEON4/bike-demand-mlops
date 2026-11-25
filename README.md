@@ -94,7 +94,7 @@ python scripts/smoke_test.py --url http://127.0.0.1:8000
 | API 기능 검사 | [`results/smoke_test_report.json`](results/smoke_test_report.json) | 정상 입력 3건(200 OK) + 필수값 누락(422) 검증 |
 | 실행 이력/버전 | [`results/run_history.jsonl`](results/run_history.jsonl), `results/runs/success/`, `results/runs/failed/` | 실행 시각·성공 여부·Git 커밋·모델/데이터 해시·실패 중단 기록 |
 | 재실행 검증 | [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md), [`results/reproducibility_log.json`](results/reproducibility_log.json) | 새 폴더 clone 후 README 절차대로 설치·재실행한 실제 결과 |
-| 클라우드 증적 | [`results/cloud/`](results/cloud/README.md) | Render 실실행·오류복구·자원정리 로그 (클라우드 실행 후 생성) |
+| 클라우드 증적 | [`results/cloud/`](results/cloud/README.md) | Render(`singapore`) 실실행([`cloud_run_log.json`](results/cloud/cloud_run_log.json)) · 오류복구([`error_recovery_log.json`](results/cloud/error_recovery_log.json)) · 자원정리([`resource_cleanup_log.json`](results/cloud/resource_cleanup_log.json)) 완료 기록 |
 | 평가·한계 문서 | [`docs/EVALUATION_AND_LIMITS.md`](docs/EVALUATION_AND_LIMITS.md) | 평가 지표 해석, 최대 오차 심층 분석, 한계 정리 |
 
 ---

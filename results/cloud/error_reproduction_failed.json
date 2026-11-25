@@ -1,0 +1,54 @@
+{
+  "phase": "error_reproduction_failed",
+  "timestamp_utc": "2026-11-25T10:09:14Z",
+  "service_url": "https://bike-demand-mlops.onrender.com",
+  "scenario": "wrong_model_path",
+  "git": {
+    "commit": "4832f64791126f0b322c2b4f144588bd5c2728ab",
+    "short_commit": "4832f64",
+    "branch": "main",
+    "is_dirty": true
+  },
+  "failed_request": {
+    "method": "POST",
+    "endpoint": "https://bike-demand-mlops.onrender.com/predict",
+    "payload": {
+      "season": 2,
+      "yr": 1,
+      "mnth": 5,
+      "holiday": 0,
+      "weekday": 3,
+      "workingday": 1,
+      "weathersit": 1,
+      "temp_c": 23.5,
+      "atemp_c": 24.0,
+      "hum_pct": 55.0,
+      "windspeed_kmh": 12.0
+    }
+  },
+  "health_check_during_incident": {
+    "http_status": 503,
+    "response": {
+      "status": "degraded",
+      "env_name": "render-singapore-free",
+      "model_loaded": false,
+      "model_path": "models/non_existent_model.joblib",
+      "model_version": null,
+      "error": "FileNotFoundError: Model artifact not found at configured MODEL_PATH='models/non_existent_model.joblib'",
+      "timestamp_utc": "2026-11-25T10:09:13Z"
+    }
+  },
+  "failed_response": {
+    "http_status": 503,
+    "body": {
+      "detail": {
+        "error_code": "MODEL_NOT_LOADED",
+        "message": "FileNotFoundError: Model artifact not found at configured MODEL_PATH='models/non_existent_model.joblib'",
+        "model_path": "models/non_existent_model.joblib",
+        "action": "Stop downstream processing and verify MODEL_PATH configuration."
+      }
+    }
+  },
+  "downstream_processing_halted": true,
+  "impact": "모델 아티팩트 로드 실패로 /health=503(degraded) 및 /predict=503(MODEL_NOT_LOADED) 반환. 오류 결과가 정상 예측 결과에 섞이지 않도록 후속 배치를 즉시 중단함."
+}

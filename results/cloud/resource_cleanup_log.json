@@ -1,0 +1,19 @@
+{
+  "timestamp_utc": "2026-11-25T10:18:17Z",
+  "resource_name": "bike-demand-mlops-api (Render Free Web Service)",
+  "service_url": "https://bike-demand-mlops.onrender.com",
+  "cleanup_action": "Render Dashboard에서 bike-demand-mlops-api 서비스 Suspend(또는 Delete) 수행",
+  "post_cleanup_probe": {
+    "http_status": 404,
+    "response_preview": "Not Found\n"
+  },
+  "confirmed_inactive_or_deleted": true,
+  "retained_resources": [
+    {
+      "resource": "GitHub Public Repository (main branch)",
+      "cost": "$0 (GitHub Free Public Repo)",
+      "reason": "과제 제출 및 평가자 재실행 검증용 코드·공개 데이터·모델·로그 보관",
+      "cleanup_plan": "과목 최종 성적 확정 후 비공개 전환 또는 아카이브 처리 예정"
+    }
+  ]
+}
